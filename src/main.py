@@ -24,8 +24,9 @@ renderer = Renderer(ctx)
 scene = Scene()
 
 # Set up the camera
-camera = Camera()
+camera = Camera(position=pyrr.Vector3([0, -3, 3]), target=pyrr.Vector3([0, 0, 0]))
 scene.add_camera(camera)
+renderer.set_camera(camera)
 
 # Load the texture
 texture_img = Image.open('assets/textures/dirt.png').convert('RGB')
@@ -52,6 +53,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    # Update the camera (No movement or rotation code, just update the view matrix)
+    camera.update()
 
     # Clear the screen
     renderer.clear_screen()
